@@ -3,6 +3,24 @@
 
 using namespace std;
 
+bool is_cord(cord *c) {
+    if (c == nullptr) {
+        return true;
+    }
+    if (c->left == nullptr && c->right == nullptr && c->len && c->len == c->data.length()) {
+        return true;
+    }
+    if (c->left != nullptr && c->right != nullptr) {
+        if (c->left->len == 0 || c->right->len == 0 || c->len != c->left->len + c->right->len) {
+            return false;
+        }
+        if (is_cord(c->left) && is_cord(c->right)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 size_t cord_length(cord_t R) {
     if (R == nullptr) {
         return 0;
@@ -46,22 +64,4 @@ cord_t cord_sub(cord_t R, size_t lo, size_t hi)
 {
     // TODO: Your implementation here
     return nullptr;
-}
-
-bool is_cord(cord *c) {
-    if (c == nullptr) {
-        return true;
-    }
-    if (c->left == nullptr && c->right == nullptr && c->len && c->len == c->data.length()) {
-        return true;
-    }
-    if (c->left != nullptr && c->right != nullptr) {
-        if (c->left->len == 0 || c->right->len == 0 | c->len != c->left->len + c->right->len) {
-            return false;
-        }
-        if (is_cord(c->left) && is_cord(c->right)) {
-            return true;
-        }
-    }
-    return false;
 }
