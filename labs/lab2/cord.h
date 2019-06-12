@@ -11,6 +11,8 @@ struct cord {
     std::string data;
 };
 
+bool is_cord(cord *);
+
 size_t cord_length(cord_t R);
 
 cord_t cord_new(const std::string &s);
@@ -24,7 +26,5 @@ char cord_charat(cord_t R, size_t i)
 
 cord_t cord_sub(cord_t R, size_t lo, size_t hi)
 /*@requires 0 <= lo && lo <= hi && hi <= cord_length(R); @*/ ;
-
-bool is_cord(cord *);
 
 #endif
