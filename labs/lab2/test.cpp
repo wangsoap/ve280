@@ -5,16 +5,18 @@ using namespace std;
 
 int main(int argc, char **argv) {
     // Test cord representing the empty string
-    cord_t c = cord_new("");
-    assert(c == nullptr);
-    assert(cord_length(c) == 0);
+    cord_t c1 = cord_new("");
+    assert(c1 == nullptr);
+    assert(cord_length(c1) == 0);
+    assert(cord_tostring(c1) == "");
 
     // Test basic leaf node
-    cord_t c1 = cord_new("1234");
-    assert(cord_length(c1) == 4);
+    cord_t c2 = cord_new("1234");
+    assert(cord_length(c2) == 4);
+    assert(cord_tostring(c2) == "1234");
 
     // Test basic concatenation node
-    cord_t c3 = cord_join(c1, cord_new("56"));
+    cord_t c3 = cord_join(c2, cord_new("56"));
     assert(cord_length(c3) == 6);
     assert(cord_tostring(c3) == "123456");
 
