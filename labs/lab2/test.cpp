@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
     cord_t c1 = cord_new("");
     assert(c1 == nullptr);
     assert(cord_length(c1) == 0);
-    assert(cord_tostring(c1) == "");
+    assert(cord_tostring(c1).empty());
 
     // Test basic leaf node
     cord_t c2 = cord_new("1234");
