@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cassert>
 #include "cord.h"
 
 using namespace std;
