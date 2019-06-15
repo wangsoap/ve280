@@ -56,7 +56,6 @@ string cord_tostring(cord_t R) {
 char cord_charat(cord_t R, size_t i)
 /*@requires 0 <= i && i < cord_length(R); @*/
 {
-    if (R== nullptr) return '\0';
     if (R->left == nullptr && R->right == nullptr) return R->data[i];
     if (i<R->left->len) return cord_charat(R->left,i);
     else return cord_charat(R->right,i-R->left->len);
