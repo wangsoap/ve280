@@ -64,7 +64,6 @@ char cord_charat(cord_t R, size_t i)
 cord_t cord_sub(cord_t R, size_t lo, size_t hi)
 /*@requires 0 <= lo && lo <= hi && hi <= cord_length(R); @*/
 {
-    if (lo==hi) return cord_new("");
     if (lo==0 && hi==R->len) return R;
     if (R->left == nullptr && R->right == nullptr) return cord_new(R->data.substr(lo,hi-lo));
 
