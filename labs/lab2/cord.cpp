@@ -51,7 +51,6 @@ string cord_tostring(cord_t R) {
     if (R == nullptr)
         return "";
     if (R->left == nullptr && R->right == nullptr)
-
         return R->data;
     else
         return cord_tostring(R->left) + cord_tostring(R->right);
