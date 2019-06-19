@@ -38,7 +38,8 @@ cord_t cord_sub(cord_t R, size_t lo, size_t hi);
 //          when it is impossible to use the entire string represented by an existing cord
 
 void cord_print(cord_t R);
-// EFFECTS: prints the internal structure of cord "R", "" for a cord representing the empty
-//          string, "somedata" for a leaf node, ( "some" "data" ) for a concatenation node
+// EFFECTS: prints the internal structure of cord "R" to standard output, "" for a cord
+//          representing the empty string, "somedata" for a leaf node, ( "some" "data" )
+//          for a concatenation node
 
 #endif
