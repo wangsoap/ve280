@@ -1,5 +1,7 @@
 # Lab Two: Cord
 
+> This lab was completed on June 19, 2019, with joint solutions by VE280 students. If you'd like to start it over, you can first delete the function definitions in `cord.cpp`, then implement them by yourself.
+
 ## Introduction
 
 The most obvious implementation of a string is as an array of characters. However, this representation of strings is particularly inefficient at handling string concatenation.
