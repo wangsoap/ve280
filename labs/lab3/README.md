@@ -20,7 +20,19 @@ For this lab, we have provided you with most of the input/output functions. Plea
 
    The function moves all the possible tiles along direction `dir`. It returns whether there's any shifted tiles. Please do not collapse/remove any tile in this function even if two tiles with the same value are moved together. You could use a `switch` statement to implement one direction such as `UP` first, then think about if any of your code can be reused in other directions.
    
-   Once you've finished function 1 and 2, please recompile your program and run the game. Try to press any arrow key and see whether the tiles are shifted correctly.
+   Once you've finished function 1 and 2, please recompile your program and run the game. Try to press any arrow key and see whether the tiles are shifted correctly. Here's an example.
+   
+   **Initial:**
+   
+   ![1](images/1.png)
+   
+   **After `LEFT`:**
+   
+   ![2](images/2.png)
+   
+   **After `RIGHT`:**
+   
+   ![3](images/3.png)
 
 3. `void Grid::upgradeTile(const Point &pt);`
 
@@ -32,7 +44,19 @@ For this lab, we have provided you with most of the input/output functions. Plea
 
    The function collapses all the possible tiles along direction "dir". When two tiles merge, they become one upgraded tile. Please notice four tiles in a row will be merged as two pairs. You also need to accumulate the points of the merged tiles. For example, when two "4" tiles merge, 8 points are added. You can obtain the points of each tile from the `Tile` structure. Return the totally earned points in this round.
    
-   Once you've finished function 3 and 4, please recompile your program and run the game. Check if two tiles with the same value are merged into an upgraded one.
+   Once you've finished function 3 and 4, please recompile your program and run the game. Check if two tiles with the same value are merged into an upgraded one. You score will also be accumulated. Here's an example.
+   
+   **Initial:**
+   
+   ![1](images/1.png)
+   
+   **After `UP`:**
+   
+   ![4](images/4.png)
+   
+   **After `DOWN`:**
+   
+   ![5](images/5.png)
 
 5. `bool Game::checkWin() const;`
 
@@ -42,7 +66,7 @@ For this lab, we have provided you with most of the input/output functions. Plea
 
    The function returns whether there's no feasible move in the current grid. If every square is full and any operation on any direction does not lead a tile to shift, then the game is over.
 
-After implementing these 6 functions, please remove the `game.debugGrid();` statement in `2048.cpp`. Then you can compile the whole project and run the game in your terminal, together with trying customized tiles such as Chemistry Elements and Heavenly Stems. Have fun!
+After implementing these 6 functions, please remove the `game.debugGrid();` statement in `2048.cpp`, which initialize a grid with 8 tiles for you to debug. Please also uncomment the `game.newTile();` statement in `2048.cpp`, so that a new tile is added into the grid after each move. Then you can compile the whole project and run the game in your terminal, together with trying customized tiles such as Chemistry Elements and Heavenly Stems. Have fun!
 
 ## Compilation
 

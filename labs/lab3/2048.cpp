@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
 
         game.collapseTiles(dir);
         if (game.shiftTiles(dir)) {
-            game.newTile();
+            // game.newTile();
         }
         game.printGame();
         if (game.checkWin()) {
