@@ -53,7 +53,7 @@ public:
 
     bool checkLose() const;
     /* 
-    // EFFECTS: Return whether there's no feasible move
+    // EFFECTS: Return whether there's no feasible move.
     //          If every square is full and any operation
     //          on any direction does not lead a tile to shift,
     //          then the game is over.
