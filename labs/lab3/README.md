@@ -22,15 +22,15 @@ For this lab, we have provided you with most of the input/output functions. Plea
    
    Once you've finished function 1 and 2, please recompile your program and run the game. Try to press an arrow key and see whether the tiles are shifted correctly. Here's an example.
    
-   **Initial:**
+   - **Initial:**
    
    ![1](images/1.png)
    
-   **After `LEFT`:**
+   - **After `LEFT`:**
    
    ![2](images/2.png)
    
-   **After `RIGHT`:**
+   - **After `RIGHT`:**
    
    ![3](images/3.png)
 
@@ -46,15 +46,15 @@ For this lab, we have provided you with most of the input/output functions. Plea
    
    Once you've finished function 3 and 4, please recompile your program and run the game. Check if two tiles with the same value are merged into an upgraded one. You score should be accumulated too. Here's an example.
    
-   **Initial:**
+   - **Initial:**
    
    ![1](images/1.png)
    
-   **After `UP`:**
+   - **After `UP`:**
    
    ![4](images/4.png)
    
-   **After `DOWN`:**
+   - **After `DOWN`:**
    
    ![5](images/5.png)
 
