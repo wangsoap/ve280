@@ -28,6 +28,7 @@ int main(int argc, char *argv[]) {
         if (argc < 4) {
             cout << "Error: Missing arguments!" << endl
                  << "Usage: ./2048 [<height> <width> <tiles-file>]" << endl;
+            return 0;
         }
         height = (unsigned) atoi(argv[1]);
         width = (unsigned) atoi(argv[2]);
