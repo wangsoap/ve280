@@ -14,7 +14,7 @@ For this lab, we have provided you with most of the input/output functions. Plea
 
 1. `bool Grid::shiftTile(const Point &dst, const Point &src);`
 
-   The function shifts/moves the tile from `src` to `dst`. You can assume `dst` and `src` are both inside the grid. However, you need to use the `bool Grid::isEmpty(const Point &pt) const` to check these two points. If `src` is empty or `dst` is non-empty, nothing will happen. The function returns whether a position change occurs.
+   The function shifts/moves the tile from `src` to `dst`. You can assume `dst` and `src` are both inside the grid. However, you need to use the `bool Grid::isEmpty(const Point &pt) const` function to check these two points. If `src` is empty or `dst` is non-empty, nothing will happen. The function returns whether a position change occurs.
 
 2. `bool Grid::shiftTiles(Direction dir);`
 
@@ -42,7 +42,7 @@ For this lab, we have provided you with most of the input/output functions. Plea
 
 4. `unsigned int Grid::collapseTiles(Direction dir);`
 
-   The function collapses all the possible tiles along direction `dir`. When two tiles merge, they become one upgraded tile. Please notice four tiles in a row will be merged as two pairs. You also need to accumulate the points of the merged tiles. For example, when two "4" tiles merge, 8 points are added. You can obtain the points of each tile from the `Tile` structure. Return the totally earned points in this round.
+   The function collapses all the possible tiles along direction `dir`. When two tiles merge, they become one upgraded tile. Please notice that four tiles in a row will be merged as two pairs. You also need to accumulate the points of the merged tiles. For example, when two "4" tiles merge, 8 points are added. You can obtain the points of each tile from the `Tile` structure. Return the totally earned points in this round.
    
    Once you've finished function 3 and 4, please recompile your program and run the game. Check if two tiles with the same value are merged into an upgraded one. You score should be accumulated too. Here's an example.
    
