@@ -65,7 +65,8 @@ public:
     */ 
 
     void upgradeTile(const Point &pt);
-    /* 
+    /*
+    // REQUIRES: "pt" is inside the grid
     // MODIFIES: this
     // EFFECTS: Upgrade the square at "pt" to the next level.
     //          For example, Tile "2" will become Tile "4"
@@ -81,7 +82,8 @@ public:
     */ 
    
     bool shiftTile(const Point &dst, const Point &src);
-    /* 
+    /*
+    // REQUIRES: "dst" and "src" are both inside the grid
     // EFFECTS: Shift/move the tile from src to dst.
     //          Return whether a position change occurs
     */ 
