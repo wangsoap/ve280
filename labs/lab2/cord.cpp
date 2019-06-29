@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 #include "cord.h"
 
 using namespace std;
@@ -56,9 +57,7 @@ string cord_tostring(cord_t R) {
         return cord_tostring(R->left) + cord_tostring(R->right);
 }
 
-char cord_charat(cord_t R, size_t i)
-/*@requires 0 <= i && i < cord_length(R); @*/
-{
+char cord_charat(cord_t R, size_t i) {
     if (R->left == nullptr && R->right == nullptr)
         return R->data[i];
     if (i < R->left->len)
@@ -67,9 +66,7 @@ char cord_charat(cord_t R, size_t i)
         return cord_charat(R->right, i - R->left->len);
 }
 
-cord_t cord_sub(cord_t R, size_t lo, size_t hi)
-/*@requires 0 <= lo && lo <= hi && hi <= cord_length(R); @*/
-{
+cord_t cord_sub(cord_t R, size_t lo, size_t hi) {
     if (lo == 0 && hi == R->len)
         return R;
     if (R->left == nullptr && R->right == nullptr)
@@ -80,4 +77,18 @@ cord_t cord_sub(cord_t R, size_t lo, size_t hi)
         return cord_sub(R->right, lo - R->left->len, hi - R->left->len);
     else
         return cord_join(cord_sub(R->left, lo, R->left->len), cord_sub(R->right, 0, hi - R->left->len));
+}
+
+void cord_print(cord_t R) {
+    if (R == nullptr)
+        cout << "\"\"";
+    else if (R->left == nullptr && R->right == nullptr)
+        cout << "\"" << R->data << "\"";
+    else {
+        cout << "( ";
+        cord_print(R->left);
+        cout << " ";
+        cord_print(R->right);
+        cout << " )";
+    }
 }
