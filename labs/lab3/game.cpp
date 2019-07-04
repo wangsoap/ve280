@@ -3,6 +3,7 @@
 #include "tile.h"
 #include "grid.h"
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -14,6 +15,10 @@ Game::Game(unsigned int height, unsigned int width, Tile tiles[], unsigned int n
     for (int i = 0; i < STARTTILES; i++) {
         newTile();
     }
+}
+
+unsigned int Game::getScore() const {
+    return score;
 }
 
 void Game::debugGrid() {
@@ -53,8 +58,10 @@ void Game::newTile() {
     }
 }
 
-void Game::collapseTiles(Direction dir) {
-    score += grid.collapseTiles(dir);
+unsigned int Game::collapseTiles(Direction dir) {
+    unsigned int points = grid.collapseTiles(dir);
+    score += points;
+    return points;
 }
 
 bool Game::shiftTiles(Direction dir) {
@@ -88,4 +95,32 @@ void Game::printGame() const {
     wcout << "Welcome to 2048!" << endl << endl;
     grid.printGrid();
     wcout << "Your score: " << score << endl;
+}
+
+std::string Game::dumpState() const {
+    ostringstream oss;
+    int index;
+    for (int i = 0; i < grid.getHeight(); i++) {
+        for (int j = 0; j < grid.getWidth(); j++) {
+            index = grid.getSquare({i, j}) == nullptr ? -1 : (int) (grid.getSquare({i, j}) - tiles);
+            oss << index << " ";
+        }
+        oss << endl;
+    }
+    oss << score << endl;
+    return oss.str();
+}
+
+void Game::loadState(const std::string &state) {
+    istringstream iss(state);
+    string line;
+    int index;
+    for (int i = 0; i < grid.getHeight(); i++) {
+        for (int j = 0; j < grid.getWidth(); j++) {
+            iss >> index;
+            grid.setSquare({i, j}, index >= 0 ? &tiles[index] : nullptr);
+        }
+        getline(iss, line);
+    }
+    iss >> score;
 }
