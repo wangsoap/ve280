@@ -96,6 +96,12 @@ or run with arguments:
 ./2048 <height> <width> <tiles-file>
 ```
 
+We also provide several test cases to verify your solution:
+
+```
+make test
+```
+
 
 ## Submission
 
