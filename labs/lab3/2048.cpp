@@ -80,8 +80,9 @@ int main(int argc, char *argv[]) {
         if (exit) break;
         if (!valid) continue;
 
-        game.collapseTiles(dir);
-        if (game.shiftTiles(dir)) {
+        unsigned int points = game.collapseTiles(dir);
+        bool shifted = game.shiftTiles(dir);
+        if (points || shifted) {
             // game.newTile();
         }
         game.printGame();
