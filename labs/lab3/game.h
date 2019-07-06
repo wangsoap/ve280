@@ -13,8 +13,10 @@ class Game {
 public:
     Game(unsigned int height, unsigned int width, Tile tiles[], unsigned int numTiles);
     /*
+    // REQUIRES: "tiles" has at least "numTiles" elements.
     // MODIFIES: this
-    // EFFECTS: Store all the tile type in this->tiles
+    // EFFECTS: Copy the first "numTiles" elements in
+    //          "tiles" to this->tiles.
     //          Create "STARTTILES" new tiles.
     */
 
@@ -41,20 +43,20 @@ public:
     // MODIFIES: this
     // EFFECTS: Call grid.collapseTiles().
     //          Accumulate the score and return the totally
-    //          earned points in this round
+    //          earned points in this round.
     */
 
     bool shiftTiles(Direction dir);
     /*
     // MODIFIES: this
-    // EFFECTS: Call grid.shiftTiles
+    // EFFECTS: Call grid.shiftTiles.
     //          Return whether there's shifted tiles.
     */
 
     bool checkWin() const;
     /*
     // EFFECTS: Return whether there's a square of WINPOINTS
-    //          tile, e.g. "2048"
+    //          tile, e.g. "2048".
     */
 
     bool checkLose() const;
@@ -82,12 +84,12 @@ public:
 
     std::string dumpState() const;
     /*
-    // EFFECTS: Dump game status to string.
+    // EFFECTS: Dump game state to string.
     */
 
     void loadState(const std::string &state);
     /*
-    // REQUIRES: "status" is a valid game dumped string.
+    // REQUIRES: "state" is a valid game dumped string.
     // MODIFIES: this
     // EFFECTS: Load game status from "status".
     */

@@ -17,13 +17,13 @@ struct Point {
 
 bool operator==(const Point &lhs, const Point &rhs);
 /* 
-// EFFECTS: Overload "==" operator to compare Point type
+// EFFECTS: Overload "==" operator to compare Point type.
 //          Returns whether two points are the same.
 */ 
 
 bool operator!=(const Point &lhs, const Point &rhs);
 /* 
-// EFFECTS: Overload "!=" operator to compare Point type
+// EFFECTS: Overload "!=" operator to compare Point type.
 //          Returns whether two points are different.
 */ 
 
