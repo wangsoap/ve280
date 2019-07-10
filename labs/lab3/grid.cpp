@@ -52,7 +52,7 @@ bool Grid::isEmpty(const Point &pt) const {
 }
 
 void Grid::upgradeTile(const Point &pt) {
-    // TODO: Your implementation here
+    squares[pt.r][pt.c]++;
 }
 
 unsigned int Grid::collapseTiles(Direction dir) {
