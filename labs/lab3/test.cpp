@@ -12,6 +12,7 @@
 #include <cmath>
 #include <ctime>
 #include <locale>
+#include <cassert>
 
 using namespace std;
 
@@ -153,12 +154,21 @@ int main(int argc, char *argv[]) {
             break;
         }
     }
+#if __APPLE__
     state = "2 3 0 -1 -1 -1 \n"
             "3 4 0 -1 -1 -1 \n"
             "2 0 -1 0 -1 -1 \n"
             "0 -1 -1 -1 -1 -1 \n"
             "-1 -1 -1 -1 -1 -1 \n"
             "180\n";
+#else
+    state = "2 0 2 0 -1 -1 \n"
+            "2 4 3 -1 -1 -1 \n"
+            "1 -1 -1 -1 -1 -1 \n"
+            "0 -1 -1 -1 -1 -1 \n"
+            "0 -1 -1 0 -1 -1 \n"
+            "156\n";
+#endif
     assert(game.dumpState() == state);
     game.debugGrid();
     while (true) {
@@ -176,12 +186,21 @@ int main(int argc, char *argv[]) {
             break;
         }
     }
+#if __APPLE__
     state = "1 -1 -1 -1 -1 -1 \n"
             "2 -1 1 0 -1 -1 \n"
             "0 4 5 -1 -1 -1 \n"
             "1 3 1 -1 1 -1 \n"
             "0 4 4 10 6 1 \n"
             "21788\n";
+#else
+    state = "1 0 5 0 3 2 \n"
+            "0 3 8 5 4 0 \n"
+            "3 0 6 3 7 3 \n"
+            "1 5 0 6 1 2 \n"
+            "0 1 3 4 2 0 \n"
+            "8804\n";
+#endif
     assert(game.dumpState() == state);
     cout << "pass!" << endl;
 
