@@ -69,13 +69,34 @@ bool Game::shiftTiles(Direction dir) {
 }
 
 bool Game::checkWin() const {
-    // TODO: Your implementation here
-    return false;
+    bool flag = false;
+    for (int vValue = 0; vValue < grid.getHeight(); ++vValue) {
+        for (int hValue = 0; hValue < grid.getWidth(); ++hValue) {
+            if (!grid.isEmpty({vValue,hValue}) && (grid.getSquare({vValue,hValue})->points == WINPOINTS)){
+                flag = true;
+            }
+        }
+    }
+    return flag;
 }
 
 bool Game::checkLose() const {
-    // TODO: Your implementation here
-    return false;
+
+    bool flag = true;
+    for (int vValue = 0; vValue < grid.getHeight(); ++vValue) {
+        for (int hValue = 0; hValue < grid.getWidth(); ++hValue) {
+            if (
+                    grid.isEmpty({vValue,hValue})
+                    ||(grid.insideGrid(adjacentPoint({vValue,hValue},UP)) && (grid.getSquare({vValue,hValue}) == grid.getSquare(adjacentPoint({vValue,hValue},UP))))
+                    ||(grid.insideGrid(adjacentPoint({vValue,hValue},DOWN)) && (grid.getSquare({vValue,hValue}) == grid.getSquare(adjacentPoint({vValue,hValue},DOWN))))
+                    ||(grid.insideGrid(adjacentPoint({vValue,hValue},RIGHT)) && (grid.getSquare({vValue,hValue}) == grid.getSquare(adjacentPoint({vValue,hValue},RIGHT))))
+                    ||(grid.insideGrid(adjacentPoint({vValue,hValue},LEFT)) && (grid.getSquare({vValue,hValue}) == grid.getSquare(adjacentPoint({vValue,hValue},LEFT))))
+                    ){
+                flag = false;
+            }
+        }
+    }
+    return flag;
 }
 
 void Game::printWin() const {
