@@ -141,31 +141,31 @@ The commands for HumanPlayers to control their characters are listed below. Comm
 
 	  <img src="images/zhaoyun.png" width="200">
 	  
-	  [Courage] You may treat your "Strike" as a "Dodge" or your "Dodge" as a "Strike".
+	  [Courage] You may treat your **Strike** as a **Dodge** or your **Dodge** as a **Strike**.
 	  
 	- **Zhen Ji** (To be implemented in 7/18 lab section)
 
 	  <img src="images/zhenji.jpg" width="200">
 	  
-	  [Gorgeous] All your black color suit hand cards may be treated as "Dodge".
+	  [Gorgeous] All your black color suit hand cards may be treated as **Dodge**.
 	  
 	- **Hua Tuo** (To be implemented in 7/19 lab section)
 
 	  <img src="images/huatuo.png" width="200">
 	  
-	  [Triage] You may use any of your red color suit cards as "Peach".
+	  [Triage] You may use any of your red color suit cards as **Peach**.
 	  
 	- **Lu Bu** (To be implemented in 7/18 lab section)
 
 	  <img src="images/lubu.png" width="200">
 	  
-	  [Unrivaled] When you use "Strike", your target must use two "Dodge" to dodge your "Strike".
+	  [Unrivaled] When you use **Strike**, your target must use two **Dodge** to dodge your **Strike**.
 	  
 	- **Diao Chan** (To be implemented in 7/19 lab section)
 
 	  <img src="images/diaochan.png" width="200">
 	  
-	  [Mischief] During your play phase, you may discard one card and select two Male Heroes and have them "Duel" each other.
+	  [Mischief] During your play phase, you may discard one card and select two Male Heroes and have them **Duel** each other.
 
 3. **MyopicPlayer**
 
