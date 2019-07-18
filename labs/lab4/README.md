@@ -75,63 +75,63 @@ The commands for HumanPlayers to control their characters are listed below. Comm
 
     - **Strike** (Implementation provided)
 
-      <img src="images/strike.jpg" style="width:200px">
+      <img src="images/strike.jpg" width="200">
 
       Strike another player. Can be avoided using a **Dodge**, otherwise causes −1 health damage. Can only be played once in a turn.
 
     - **Dodge** (Implementation provided)
 
-      <img src="images/dodge.jpg" style="width:200px">
+      <img src="images/dodge.jpg" width="200">
 
       Dodge a strike. Can only be played to counter a **Strike**.
 
     - **Peach** (Implementation provided)
 
-      <img src="images/peach.jpg" style="width:200px">
+      <img src="images/peach.jpg" width="200">
 
       Recover one health point. Can be played on another hero only if he is dying.
 
     - **Arrow Barrage** (To be implemented in 7/18 lab section)
 
-      <img src="images/ab.jpg" style="width:200px">
+      <img src="images/ab.jpg" width="200">
 
       Take effect on all players, except the current player. Must play a
     **Dodge** or receive −1 health damage.
 
     - **Barbarian Invasion** (To be implemented in 7/19 lab section)
 
-      <img src="images/bi.jpg" style="width:200px">
+      <img src="images/bi.jpg" width="200">
 
       Take effect on all players, except the current player. Must play a
     **Strike** or receive −1 health damage.
 
     - **Something for Nothing** (Implementation provided)
 
-      <img src="images/sfn.jpg" style="width:200px">
+      <img src="images/sfn.jpg" width="200">
 
       Draw two cards.
 
     - **Bountiful Harvest** (Implementation provided)
 
-      <img src="images/bh.jpg" style="width:200px">
+      <img src="images/bh.jpg" width="200">
 
       Each player draws one card.
 
     - **Dismantle** (To be implemented in 7/18 lab section)
 
-      <img src="images/dismantle.jpg" style="width:200px">
+      <img src="images/dismantle.jpg" width="200">
 
       Discard any card of another player.
 
     - **Snatch** (To be implemented in 7/18 lab section)
 
-      <img src="images/snatch.jpg" style="width:200px">
+      <img src="images/snatch.jpg" width="200">
 
       Seize any card of another player.
 
     - **Duel** (To be implemented in 7/19 lab section)
 
-      <img src="images/duel.jpg" style="width:200px">
+      <img src="images/duel.jpg" width="200">
 
       Challenge another player into a duel during which the two players have to play **Strike** cards. The first one not playing **Strike** gets -1 health damage;
 
@@ -139,31 +139,31 @@ The commands for HumanPlayers to control their characters are listed below. Comm
 
 	- **Zhao Yun** (Implementation provided)
 
-	  <img src="images/zhaoyun.png" style="width:200px">
+	  <img src="images/zhaoyun.png" width="200">
 	  
 	  [Courage] You may treat your "Strike" as a "Dodge" or your "Dodge" as a "Strike".
 	  
 	- **Zhen Ji** (To be implemented in 7/18 lab section)
 
-	  <img src="images/zhenji.jpg" style="width:200px">
+	  <img src="images/zhenji.jpg" width="200">
 	  
 	  [Gorgeous] All your black color suit hand cards may be treated as "Dodge".
 	  
 	- **Hua Tuo** (To be implemented in 7/19 lab section)
 
-	  <img src="images/huatuo.png" style="width:200px">
+	  <img src="images/huatuo.png" width="200">
 	  
 	  [Triage] You may use any of your red color suit cards as "Peach".
 	  
 	- **Lu Bu** (To be implemented in 7/18 lab section)
 
-	  <img src="images/lubu.png" style="width:200px">
+	  <img src="images/lubu.png" width="200">
 	  
 	  [Unrivaled] When you use "Strike", your target must use two "Dodge" to dodge your "Strike".
 	  
 	- **Diao Chan** (To be implemented in 7/19 lab section)
 
-	  <img src="images/diaochan.png" style="width:200px">
+	  <img src="images/diaochan.png" width="200">
 	  
 	  [Mischief] During your play phase, you may discard one card and select two Male Heroes and have them "Duel" each other.
 
