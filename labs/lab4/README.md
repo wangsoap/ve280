@@ -67,11 +67,11 @@ The commands for HumanPlayers to control their characters are listed below. Comm
 
 10. `target <n>`
 
-   Select the target of a card.
+    Select the target of a card.
    
 11. `discard <n1> <n2> ...`
 
-   Discard the required number of cards.
+    Discard the required number of cards.
 
 
 ## Implementation
