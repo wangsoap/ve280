@@ -18,53 +18,58 @@ During the game, each player takes his/her turn one by one. There are three main
 
 2. **Action phase**
 
-   Any number of cards may be played, but generally, each player may only use the **Strike** card once. The function `Player::playCard()` is called for each card being played. The player is first requested to select a card. Then the `Card::takeEffect()` function of the selected card is called, with the following steps taking place in this function. 
+   Any number of cards may be played, but generally, each player may only use the **Strike** card once. The function `Player::playCard()` is called for each card being played. The player is first requested to select a card. Then the `Card::takeEffect(source, targets)` function of the selected card is called, with the following steps taking place in this function. 
    
-   For those cards that require a target, the player is further requested to select another player as the target by calling the function `Player::selectTarget()`. After these selections, the card has taken effect and the target may be requested for a response card, for example, a `Dodge` for a `Strike`. This step is done by calling `Player::requestCard(DODGE)` upon the target player. If the target player fails to respond, he/she may get some penalty depending on the card's effect, which is usually losing one health point. If a player's health points decrease to 0 and no one plays a `Peach` card, the player is killed and no longer takes any turn.
+   For those cards that require a target, the player is further requested to select another player as the target by calling the function `Player::selectTarget()`. After these selections, the card has taken effect and the target may be requested for a response card, for example, a **Dodge** for a **Strike**. This step is done by calling `Player::requestCard(DODGE)` upon the target player. If the target player fails to respond, he/she may get some penalty depending on the card's effect, which is usually losing one health point. If a player's health points decrease to 0 and no one plays a **Peach** card, the player is killed and no longer takes any turn.
    
 3. **Discard phase**
 
    After playing, the player will have to discard cards in his hand such that the remaining number of cards is equal to his current health points. The function `Player::discardCards()` is called in this phase.
    
-The commands for HumanPlayers to control their characters are listed below. Commands 1 to 4 are general commands that can be executed anytime during a game. Commands 5 to 10 can only be used when prompted.
+   
+The commands for HumanPlayers to control their characters are listed below. Commands 1 to 5 are general commands that can be executed anytime during a game. Commands 6 to 11 can only be used when prompted.
 
-1. `players`
+1. `clear`
+
+   Clear the screen so that the next player cannot see the records of your turn.
+
+2. `players`
 
    List all the players and display their names, health points and heroes.
 
-2. `player <n>`
+3. `player <n>`
 
    Display one player's information according to the index in players list, which includes the player's name, health points and hero with ac ASCII Art.
 
-3. `player`
+4. `player`
 
    Display the current player's information.
 
-4. `cards`
+5. `cards`
 
    List all the cards of the current player.
    
-5. `card 0`
+6. `card 0`
 
    Refuse to play any card.
 
-6. `card <n>`
+7. `card <n>`
 
    Select one card to play.
 
-7. `card* <n>`
+8. `card* <n>`
 
 	Use the hero's ability to play one card.
 
-8. `card*`
+9. `card*`
 
    Use the hero's ability if no card needs to be played.
 
-9. `target <n>`
+10. `target <n>`
 
    Select the target of a card.
    
-10. `discard <n1> <n2> ...`
+11. `discard <n1> <n2> ...`
 
    Discard the required number of cards.
 
@@ -73,67 +78,65 @@ The commands for HumanPlayers to control their characters are listed below. Comm
 
 1. **Cards**
 
-    - **Strike** (Implementation provided)
+   - **Strike** (Implementation provided)
 
-      <img src="images/strike.jpg" width="200">
+     <img src="images/strike.jpg" width="200">
 
-      Strike another player. Can be avoided using a **Dodge**, otherwise causes −1 health damage. Can only be played once in a turn.
+     Strike another player. Can be avoided using a **Dodge**, otherwise causes −1 health damage. Can only be played once in a turn.
 
-    - **Dodge** (Implementation provided)
+   - **Dodge** (Implementation provided)
 
-      <img src="images/dodge.jpg" width="200">
+     <img src="images/dodge.jpg" width="200">
 
-      Dodge a strike. Can only be played to counter a **Strike**.
+     Dodge a strike. Can only be played to counter a **Strike**.
 
-    - **Peach** (Implementation provided)
+   - **Peach** (Implementation provided)
 
-      <img src="images/peach.jpg" width="200">
+     <img src="images/peach.jpg" width="200">
 
-      Recover one health point. Can be played on another hero only if he is dying.
+     Recover one health point. Can be played on another hero only if he is dying.
 
-    - **Arrow Barrage** (To be implemented in 7/18 lab section)
+   - **Arrow Barrage** (To be implemented in 7/18 lab section)
 
-      <img src="images/ab.jpg" width="200">
+     <img src="images/ab.jpg" width="200">
 
-      Take effect on all players, except the current player. Must play a
-    **Dodge** or receive −1 health damage.
+     Take effect on all players, except the current player. Must play a **Dodge** or receive −1 health damage.
 
-    - **Barbarian Invasion** (To be implemented in 7/19 lab section)
+   - **Barbarian Invasion** (To be implemented in 7/19 lab section)
 
-      <img src="images/bi.jpg" width="200">
+     <img src="images/bi.jpg" width="200">
 
-      Take effect on all players, except the current player. Must play a
-    **Strike** or receive −1 health damage.
+     Take effect on all players, except the current player. Must play a **Strike** or receive −1 health damage.
 
-    - **Something for Nothing** (Implementation provided)
+   - **Something for Nothing** (Implementation provided)
 
-      <img src="images/sfn.jpg" width="200">
+     <img src="images/sfn.jpg" width="200">
 
-      Draw two cards.
+     Draw two cards.
 
-    - **Bountiful Harvest** (Implementation provided)
+   - **Bountiful Harvest** (Implementation provided)
 
-      <img src="images/bh.jpg" width="200">
+     <img src="images/bh.jpg" width="200">
 
-      Each player draws one card.
+     Each player draws one card.
 
-    - **Dismantle** (To be implemented in 7/18 lab section)
+   - **Dismantle** (To be implemented in 7/18 lab section)
 
-      <img src="images/dismantle.jpg" width="200">
+     <img src="images/dismantle.jpg" width="200">
 
-      Discard any card of another player.
+     Discard any card of another player.
 
-    - **Snatch** (To be implemented in 7/18 lab section)
+   - **Snatch** (To be implemented in 7/18 lab section)
 
-      <img src="images/snatch.jpg" width="200">
+     <img src="images/snatch.jpg" width="200">
 
-      Seize any card of another player.
+     Seize any card of another player.
 
-    - **Duel** (To be implemented in 7/19 lab section)
+   - **Duel** (To be implemented in 7/19 lab section)
 
-      <img src="images/duel.jpg" width="200">
+     <img src="images/duel.jpg" width="200">
 
-      Challenge another player into a duel during which the two players have to play **Strike** cards. The first one not playing **Strike** gets -1 health damage;
+     Challenge another player into a duel during which the two players have to play **Strike** cards. The first one not playing **Strike** gets -1 health damage;
 
 2. **Heroes**
 
@@ -169,7 +172,7 @@ The commands for HumanPlayers to control their characters are listed below. Comm
 
 3. **MyopicPlayer**
 
-	We have provided you with all the implementation of `HumanPlayer`, but so far the strategies of `MyopicPlayer` are quite stupid. You need to update the following two functions to make it more challenging to play against a MyopicPlayer. You may find our implementation or `const Card *MyopicPlayer::requestCard(Action action)` helpful. It's also encouraged to think about how to update other functions, such as `void MyopicPlayer::discardCards()`, to make the MyopicPlayer more like a ProvidentPlayer.
+	We have provided you with all the implementation of `HumanPlayer`, but so far the strategies of `MyopicPlayer` are quite stupid. You need to update the following two functions to make it more challenging to play against a MyopicPlayer. You may find our implementation of `const Card *MyopicPlayer::requestCard(Action action)` helpful. It's also encouraged to think about how to update other functions, such as `void MyopicPlayer::discardCards()`, to make the MyopicPlayer more like a ProvidentPlayer.
 	
 	- `void MyopicPlayer::playCard()`
 
