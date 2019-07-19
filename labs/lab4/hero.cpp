@@ -163,6 +163,7 @@ ZhenJi::ZhenJi() : Hero(WEI, FEMALE, 3, "甄姬", R"(    ,/##(*%@@%/####((((((((
 ##//**,,,,****,,,,,*,,,,,,**,,,,,*///**/****/////*****////////////*******//****/((#(*/*..,****//##()") {}
 
 const Card *ZhenJi::castCard(const Card *card) {
+    // TODO: Your implementation here
     throw NonCastableCardException(card);
 }
 
@@ -217,6 +218,7 @@ HuaTuo::HuaTuo() : Hero(NEUTRAL, MALE, 3, "华佗", R"(    ,/##(*%@@%/###(((((((
 ##/////******///*,,,,,***,,,,,,,,,,,,,,,**,,,,,,,,,,,,,,,,,,,,,***,,,.,,,,,,,,,*/(#(*//**,***///##()") {}
 
 const Card *HuaTuo::castCard(const Card *card) {
+    // TODO: Your implementation here
     throw NonCastableCardException(card);
 }
 
@@ -271,6 +273,7 @@ LuBu::LuBu() : Hero(NEUTRAL, MALE, 4, "吕布", R"(,/(#(*#%%(/####((((((((((((((
 ##(((((((((((((((///////////////////////////////////////////////////***///***//(((#(/%@,***/((##()") {}
 
 const Card *LuBu::castCard(const Card *card) {
+    // TODO: Your implementation here
     throw NonCastableCardException(card);
 }
 
@@ -325,6 +328,7 @@ DiaoChan::DiaoChan() : Hero(NEUTRAL, FEMALE, 3, "貂蝉", R"(    ,/(#(*%@@%/###(
 ##//**********,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,*/(#(*(/,.,***///##()") {}
 
 const Card *DiaoChan::castCard(const Card *card) {
+    // TODO: Your implementation here
     throw NonCastableCardException(card);
 }
 

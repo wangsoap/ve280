@@ -372,6 +372,7 @@ void HumanPlayer::discardCards() {
 MyopicPlayer::MyopicPlayer(const std::string &name, Camp camp) : Player(name, camp) {}
 
 void MyopicPlayer::playCard() {
+    // TODO: Optimize MyopicPlayer's card playing strategies
     if (!cards.empty()) {
         try {
             cards[rand() % cards.size()]->takeEffect(this, getGame()->getPlayers());
@@ -381,6 +382,7 @@ void MyopicPlayer::playCard() {
 };
 
 Player *MyopicPlayer::selectTarget() {
+    // TODO: Optimize MyopicPlayer's target selecting strategies
     return getGame()->getPlayers()[rand() % getGame()->getPlayers().size()];
 }
 

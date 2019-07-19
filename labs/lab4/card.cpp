@@ -149,9 +149,11 @@ void Peach::takeEffect(Player *source, const std::vector<Player *> &targets) con
 }
 
 void ArrowBarrage::takeEffect(Player *source, const std::vector<Player *> &targets) const {
+    // TODO: Your implementation here
 }
 
 void BarbarianInvasion::takeEffect(Player *source, const std::vector<Player *> &targets) const {
+    // TODO: Your implementation here
 }
 
 void SomethingForNothing::takeEffect(Player *source, const std::vector<Player *> &targets) const {
@@ -169,10 +171,13 @@ void BountifulHarvest::takeEffect(Player *source, const std::vector<Player *> &t
 }
 
 void Dismantle::takeEffect(Player *source, const std::vector<Player *> &targets) const {
+    // TODO: Your implementation here
 }
 
 void Snatch::takeEffect(Player *source, const std::vector<Player *> &targets) const {
+    // TODO: Your implementation here
 }
 
 void Duel::takeEffect(Player *source, const std::vector<Player *> &targets) const {
+    // TODO: Your implementation here
 }
