@@ -56,18 +56,147 @@ void Grid::upgradeTile(const Point &pt) {
 }
 
 unsigned int Grid::collapseTiles(Direction dir) {
-    // TODO: Your implementation here
-    return 0;
+    Point dst;
+    unsigned int score = 0;
+    switch (dir) {
+        case UP:
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
+                    dst = {i, j};
+                    if (!isEmpty(dst)) {
+                        findPos(dst, dir);
+                        //cout << i << ' ' <<  j << ' ' << dst.r << ' ' << dst.c << endl;
+                        dst = adjacentPoint(dst, dir);
+                        if (insideGrid(dst) && getSquare(dst) != nullptr && getSquare(dst)->points == getSquare({i, j})->points) {
+                            //cout << i << ' ' << j << endl;
+                            clearSquare(dst);
+                            upgradeTile({i, j});
+                            score += getSquare({i, j})->points;
+                            //printGrid();
+                        }
+                    }
+                }
+            }
+            break;
+        case DOWN:
+            for (int i = height - 1; i >= 0; i--) {
+                for (int j = 0; j < width; j++) {
+                    dst = {i, j};
+                    if (!isEmpty(dst)) {
+                        findPos(dst, dir);
+                        dst = adjacentPoint(dst, dir);
+                        if (insideGrid(dst) && getSquare(dst) != nullptr && getSquare(dst)->points == getSquare({i, j})->points) {
+                            clearSquare(dst);
+                            upgradeTile({i, j});
+                            score += getSquare({i, j})->points;
+                        }
+                    }
+                }
+            }
+            break;
+        case LEFT:
+            for (int i = height - 1; i >= 0; i--) {
+                for (int j = 0; j < width; j++) {
+                    dst = {i, j};
+                    if (!isEmpty(dst)) {
+                        findPos(dst, dir);
+                        dst = adjacentPoint(dst, dir);
+                        if (insideGrid(dst) && getSquare(dst) != nullptr && getSquare(dst)->points == getSquare({i, j})->points) {
+                            clearSquare(dst);
+                            upgradeTile({i, j});
+                            score += getSquare({i, j})->points;
+                        }
+                    }
+                }
+            }
+            break;
+        case RIGHT:
+            for (int i = height - 1; i >= 0; i--) {
+                for (int j = width - 1; j >= 0; j--) {
+                    dst = {i, j};
+                    if (!isEmpty(dst)) {
+                        findPos(dst, dir);
+                        dst = adjacentPoint(dst, dir);
+                        if (insideGrid(dst) && getSquare(dst) != nullptr && getSquare(dst)->points == getSquare({i, j})->points) {
+                            clearSquare(dst);
+                            upgradeTile({i, j});
+                            score += getSquare({i, j})->points;
+                        }
+                    }
+                }
+            }
+            break;
+    }
+    return score;
+    
 }
 
 bool Grid::shiftTile(const Point &dst, const Point &src) {
-    // TODO: Your implementation here
-    return false;
+    if (!isEmpty(dst) || isEmpty(src)) return false;
+    setSquare(dst, getSquare(src));
+    clearSquare(src);
+    return true;
+}
+
+bool Grid::findPos(Point &dst, Direction dir) const {
+    Point adjPt = adjacentPoint(dst, dir);
+    if (!insideGrid(adjPt)) return false;
+    if (getSquare(adjPt) != nullptr) return false;
+    dst = adjPt;
+    findPos(dst,dir);
+    return true;
 }
 
 bool Grid::shiftTiles(Direction dir) {
-    // TODO: Your implementation here
-    return false;
+    Point dst;
+    bool flag = false;
+    switch (dir) {
+        case UP:
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
+                    dst = {i, j};
+                    if (!isEmpty(dst) && findPos(dst, dir)) {
+                        shiftTile(dst, {i, j});
+                        flag = true;
+                    }
+                }
+            }
+            break;
+        case DOWN:
+            for (int i = height - 1; i >= 0; i--) {
+                for (int j = 0; j < width; j++) {
+                    dst = {i, j};
+                    if (!isEmpty(dst) && findPos(dst, dir)) {
+                        shiftTile(dst, {i, j});
+                        flag = true;
+                    }
+                }
+            }
+            break;
+        case LEFT:
+            for (int i = height - 1; i >= 0; i--) {
+                for (int j = 0; j < width; j++) {
+                    dst = {i, j};
+                    if (!isEmpty(dst) && findPos(dst, dir)) {
+                        shiftTile(dst, {i, j});
+                        flag = true;
+                    }
+                }
+            }
+            break;
+        case RIGHT:
+            for (int i = height - 1; i >= 0; i--) {
+                for (int j = width - 1; j >= 0; j--) {
+                    dst = {i, j};
+                    if (!isEmpty(dst) && findPos(dst, dir)) {
+                        shiftTile(dst, {i, j});
+                        flag = true;
+                    }
+                }
+            }
+            break;
+    }
+    return flag;
 }
 
 void Grid::printGrid() const {
