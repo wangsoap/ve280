@@ -93,8 +93,6 @@ public:
     // MODIFIES: this
     // EFFECTS: Load game status from "status".
     */
-
-    bool checkHelper(int i, int j, Direction dir) const;
 };
 
 #endif

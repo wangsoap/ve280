@@ -79,31 +79,9 @@ bool Game::checkWin() const {
     return false;
 }
 
-bool Game::checkHelper(int i, int j, Direction dir) const {
-    Point dst;
-    dst = {i ,j};
-    if (grid.findPos(dst, dir)) return false;
-    dst = adjacentPoint(dst, dir);
-    if (grid.insideGrid(dst) && grid.getSquare(dst) != nullptr && grid.getSquare(dst)->points == grid.getSquare({i, j})->points) return false;
-    return true;
-}
-
 bool Game::checkLose() const {
-    Point dst;
-    for (int i = 0; i < grid.getHeight(); i++) {
-        for (int j = 0; j < grid.getWidth(); j++) {
-            if (grid.getSquare({i, j}) == nullptr) continue;
-            Direction dir = Direction(0);
-            if (!checkHelper(i, j, dir)) return false;
-            dir = opposite(dir);
-            if (!checkHelper(i, j, dir)) return false;
-            dir = rotateClockwise(dir);
-            if (!checkHelper(i, j, dir)) return false;
-            dir = opposite(dir);
-            if (!checkHelper(i, j, dir)) return false;
-        }
-    }
-    return true;
+    // TODO: Your implementation here
+    return false;
 }
 
 void Game::printWin() const {
@@ -119,7 +97,7 @@ void Game::printLose() const {
 }
 
 void Game::printGame() const {
-    //system("clear");
+    system("clear");
     wcout << "Welcome to 2048!" << endl << endl;
     grid.printGrid();
     wcout << "Your score: " << score << endl;
