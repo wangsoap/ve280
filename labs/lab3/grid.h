@@ -100,6 +100,8 @@ public:
     /* 
     // EFFECTS: Print the whole grid.
     */ 
+
+   bool findPos(Point &dst, Direction dir) const;
 };
 
 #endif
