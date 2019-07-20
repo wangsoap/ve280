@@ -30,26 +30,26 @@ public:
 
     bool insideGrid(const Point &pt) const;
     /* 
-    // EFFECTS: Check whether a point "pt" is inside the grid
+    // EFFECTS: Check whether a point "pt" is inside the grid.
     */ 
 
     Tile *getSquare(const Point &pt) const;
     /*
-    // REQUIRES: "pt" is inside the grid
-    // EFFECTS: Return the tile pointer of the square at "pt"
+    // REQUIRES: "pt" is inside the grid.
+    // EFFECTS: Return the tile pointer of the square at "pt".
     */ 
 
     void setSquare(const Point &pt, Tile *tile);
     /*
-    // REQUIRES: "pt" is inside the grid
+    // REQUIRES: "pt" is inside the grid.
     // MODIFIES: this
-    // EFFECTS: Point the square pointer at "pt" to "tile"
+    // EFFECTS: Point the square pointer at "pt" to "tile".
     */ 
 
     void clearSquare(const Point &pt);
     /* 
     // MODIFIES: this
-    // EFFECTS: Clear one square
+    // EFFECTS: Clear one square.
     */ 
 
     void clearSquares();
@@ -60,17 +60,17 @@ public:
 
     bool isEmpty(const Point &pt) const;
     /*
-    // REQUIRES: "pt" is inside the grid
-    // EFFECTS: Return whether the square at "pt" is empty
+    // REQUIRES: "pt" is inside the grid.
+    // EFFECTS: Return whether the square at "pt" is empty.
     */ 
 
     void upgradeTile(const Point &pt);
     /*
     // REQUIRES: "pt" is inside the grid and non-empty
-    //           and the next level of tile exists
+    //           and the next level of tile exists.
     // MODIFIES: this
     // EFFECTS: Upgrade the tile at "pt" to the next level.
-    //          For example, Tile "2" will become Tile "4"
+    //          For example, Tile "2" will become Tile "4".
     */ 
 
     unsigned int collapseTiles(Direction dir);
@@ -79,26 +79,26 @@ public:
     // EFFECTS: Collapse all the possible tiles along direction "dir"
     //          When two tiles merge, they become one upgraded tile.
     //          Accumulate the points of the merged tiles.
-    //          Return the totally earned points in this round
+    //          Return the totally earned points in this round.
     */ 
    
     bool shiftTile(const Point &dst, const Point &src);
     /*
-    // REQUIRES: "dst" and "src" are both inside the grid
+    // REQUIRES: "dst" and "src" are both inside the grid.
     // EFFECTS: Shift/move the tile from "src" to "dst".
-    //          Return whether a position change occurs
+    //          Return whether a position change occurs.
     */ 
 
     bool shiftTiles(Direction dir);
     /* 
     // EFFECTS: Move all the possible tiles along direction "dir"
     //          without collapsing/merging any of them.
-    //          Return whether there's any shifted tiles
+    //          Return whether there's any shifted tiles.
     */ 
 
     void printGrid() const;
     /* 
-    // EFFECTS: Print the whole Grid
+    // EFFECTS: Print the whole grid.
     */ 
 };
 

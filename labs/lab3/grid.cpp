@@ -52,77 +52,82 @@ bool Grid::isEmpty(const Point &pt) const {
 }
 
 void Grid::upgradeTile(const Point &pt) {
-    //this->setSquare(pt,getSquare(pt)+1);
-    //I know it is wrong but I don't know what's happening here even with the hint.
+    squares[pt.r][pt.c]++;
+}
+
+static Point getIterationBase(Direction dir, unsigned int height, unsigned int width) {
+    Point base;
+    switch (dir) {
+        case UP:
+            base = {0, 0};
+            break;
+        case DOWN:
+            base = {(int) height - 1, (int) width - 1};
+            break;
+        case LEFT:
+            base = {(int) height - 1, 0};
+            break;
+        case RIGHT:
+            base = {0, (int) width - 1};
+            break;
+    }
+    return base;
 }
 
 unsigned int Grid::collapseTiles(Direction dir) {
-    unsigned int points=0;
-    if (dir==UP || dir==DOWN){
-        for (int i = 0; i < height; i++) {
-            if (insideGrid(adjacentPoint({i, 0}, dir))) {
-                for (int j = 0; j < width; j++) {
-                    if (getSquare({i,j})==getSquare(adjacentPoint({i, j}, dir))) {
-                        clearSquare({i,j});
-                        upgradeTile(adjacentPoint({i, j}, dir));
-                        points+=getSquare(adjacentPoint({i, j}, dir))->points;
-                    }
+    unsigned int points = 0;
+    Point base = getIterationBase(dir, height, width);
+    Direction nextBase = rotateClockwise(dir);
+    Direction nextTarget = opposite(dir);
+    while (insideGrid(base)) {
+        Point dst = base, src = base;
+        while (insideGrid(src)) {
+            if (!isEmpty(src)) {
+                if (!isEmpty(dst) && dst != src && getSquare(dst) == getSquare(src)) {
+                    clearSquare(src);
+                    upgradeTile(dst);
+                    points += getSquare(dst)->points;
+                    dst = adjacentPoint(dst, nextTarget);
+                } else {
+                    dst = src;
                 }
             }
+            src = adjacentPoint(src, nextTarget);
         }
-    }else {
-        for (int j = 0; j < width; j++) {
-            if (insideGrid(adjacentPoint({0, j}, dir))) {
-                for (int i = 0; i < height; i++) {
-                    if (getSquare({i,j})==getSquare(adjacentPoint({i, j}, dir))) {
-                        clearSquare({i,j});
-                        upgradeTile(adjacentPoint({i, j}, dir));
-                        points+=getSquare(adjacentPoint({i, j}, dir))->points;
-                    }
-                }
-            }
-        }
+        base = adjacentPoint(base, nextBase);
     }
     return points;
 }
+
 bool Grid::shiftTile(const Point &dst, const Point &src) {
-    if (!isEmpty(src) && isEmpty(dst)) {
-        setSquare(dst,getSquare(src));
-        setSquare(src, nullptr);
+    if (!isEmpty(dst) || isEmpty(src)) {
+        return false;
+    } else {
+        setSquare(dst, getSquare(src));
+        clearSquare(src);
         return true;
     }
-    return false;
 }
 
 bool Grid::shiftTiles(Direction dir) {
-    bool change= false,all= false;
-    while (!change) {
-        change=true;
-        if (dir == UP || dir == DOWN) {
-            for (int i = 0; i < height; i++) {
-                if (insideGrid(adjacentPoint({i, 0}, dir))) {
-                    for (int j = 0; j < width; j++) {
-                        while (shiftTile(adjacentPoint({i, j}, dir), {i, j})) {
-                            all = true;
-                            change= false;
-                        }
-                    }
+    bool shifted = false;
+    Point base = getIterationBase(dir, height, width);
+    Direction nextBase = rotateClockwise(dir);
+    Direction nextTarget = opposite(dir);
+    while (insideGrid(base)) {
+        Point dst = base, src = base;
+        while (insideGrid(src)) {
+            if (!isEmpty(src)) {
+                if (shiftTile(dst, src)) {
+                    shifted = true;
                 }
+                dst = adjacentPoint(dst, nextTarget);
             }
-        } else {
-            for (int j = 0; j < width; j++) {
-                if (insideGrid(adjacentPoint({0, j}, dir))) {
-                    for (int i = 0; i < height; i++) {
-                        while (shiftTile(adjacentPoint({i, j}, dir), {i, j})) {
-                            change= false;
-                            all = true;
-                        }
-                    }
-                }
-            }
+            src = adjacentPoint(src, nextTarget);
         }
+        base = adjacentPoint(base, nextBase);
     }
-    return all;
+    return shifted;
 }
 
 void Grid::printGrid() const {

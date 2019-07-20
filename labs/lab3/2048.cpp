@@ -32,6 +32,14 @@ int main(int argc, char *argv[]) {
         }
         height = (unsigned) atoi(argv[1]);
         width = (unsigned) atoi(argv[2]);
+        if (height <= 0 || height > MAXHEIGHT) {
+            cout << "Error: The grid height is illegal!" << endl;
+            return 0;
+        }
+        if (width <= 0 || width > MAXWIDTH) {
+            cout << "Error: The grid width is illegal!" << endl;
+            return 0;
+        }
         numTiles = getTiles(argv[3], tiles);
         if (!numTiles) return 0;
         for (int i = 0; i < numTiles; i++) {
@@ -47,7 +55,6 @@ int main(int argc, char *argv[]) {
     }
 
     Game game(height, width, tiles, numTiles);
-    game.debugGrid();
     game.printGame();
 
     while (true) {
@@ -80,9 +87,10 @@ int main(int argc, char *argv[]) {
         if (exit) break;
         if (!valid) continue;
 
-        game.collapseTiles(dir);
-        if (game.shiftTiles(dir)) {
-            // game.newTile();
+        unsigned int points = game.collapseTiles(dir);
+        bool shifted = game.shiftTiles(dir);
+        if (points || shifted) {
+            game.newTile();
         }
         game.printGame();
         if (game.checkWin()) {
