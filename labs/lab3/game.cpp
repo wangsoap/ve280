@@ -80,8 +80,25 @@ bool Game::checkWin() const {
 }
 
 bool Game::checkLose() const {
-    // TODO: Your implementation here
-    return false;
+    for (int i = 0; i < grid.getHeight(); i++) {
+        for (int j = 0; j < grid.getWidth(); j++) {
+            if (grid.isEmpty({i, j})) {
+                return false;
+            }
+        }
+    }
+    for (int i = 0; i < grid.getHeight(); i++) {
+        for (int j = 0; j < grid.getWidth(); j++) {
+            Tile *target = grid.getSquare({i, j});
+            Point adjRight = adjacentPoint({i, j}, RIGHT);
+            Point adjDown = adjacentPoint({i, j}, DOWN);
+            if ((grid.insideGrid(adjRight) && target == grid.getSquare(adjRight)) ||
+                (grid.insideGrid(adjDown) && target == grid.getSquare(adjDown))) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 void Game::printWin() const {

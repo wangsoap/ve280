@@ -55,9 +55,48 @@ void Grid::upgradeTile(const Point &pt) {
     squares[pt.r][pt.c]++;
 }
 
+static Point getIterationBase(Direction dir, unsigned int height, unsigned int width) {
+    Point base;
+    switch (dir) {
+        case UP:
+            base = {0, 0};
+            break;
+        case DOWN:
+            base = {(int) height - 1, (int) width - 1};
+            break;
+        case LEFT:
+            base = {(int) height - 1, 0};
+            break;
+        case RIGHT:
+            base = {0, (int) width - 1};
+            break;
+    }
+    return base;
+}
+
 unsigned int Grid::collapseTiles(Direction dir) {
-    // TODO: Your implementation here
-    return 0;
+    unsigned int points = 0;
+    Point base = getIterationBase(dir, height, width);
+    Direction nextBase = rotateClockwise(dir);
+    Direction nextTarget = opposite(dir);
+    while (insideGrid(base)) {
+        Point dst = base, src = base;
+        while (insideGrid(src)) {
+            if (!isEmpty(src)) {
+                if (!isEmpty(dst) && dst != src && getSquare(dst) == getSquare(src)) {
+                    clearSquare(src);
+                    upgradeTile(dst);
+                    points += getSquare(dst)->points;
+                    dst = adjacentPoint(dst, nextTarget);
+                } else {
+                    dst = src;
+                }
+            }
+            src = adjacentPoint(src, nextTarget);
+        }
+        base = adjacentPoint(base, nextBase);
+    }
+    return points;
 }
 
 bool Grid::shiftTile(const Point &dst, const Point &src) {
@@ -71,8 +110,24 @@ bool Grid::shiftTile(const Point &dst, const Point &src) {
 }
 
 bool Grid::shiftTiles(Direction dir) {
-    // TODO: Your implementation here
-    return false;
+    bool shifted = false;
+    Point base = getIterationBase(dir, height, width);
+    Direction nextBase = rotateClockwise(dir);
+    Direction nextTarget = opposite(dir);
+    while (insideGrid(base)) {
+        Point dst = base, src = base;
+        while (insideGrid(src)) {
+            if (!isEmpty(src)) {
+                if (shiftTile(dst, src)) {
+                    shifted = true;
+                }
+                dst = adjacentPoint(dst, nextTarget);
+            }
+            src = adjacentPoint(src, nextTarget);
+        }
+        base = adjacentPoint(base, nextBase);
+    }
+    return shifted;
 }
 
 void Grid::printGrid() const {
