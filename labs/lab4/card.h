@@ -60,6 +60,13 @@ public:
 };
 
 
+class LubuStrike : public Card {
+public:
+    LubuStrike(Spot spot, Suit suit) : Card(spot, suit, STRIKE) {}
+
+    void takeEffect(Player *source, const std::vector<Player *> &targets) const override;
+};
+
 class Strike : public Card {
 public:
     Strike(Spot spot, Suit suit) : Card(spot, suit, STRIKE) {}
@@ -126,6 +133,13 @@ public:
 class Duel : public Card {
 public:
     Duel(Spot spot, Suit suit) : Card(spot, suit, DUEL) {}
+
+    void takeEffect(Player *source, const std::vector<Player *> &targets) const override;
+};
+
+class DiaoChanDuel : public Card {
+public:
+    DiaoChanDuel(Spot spot, Suit suit) : Card(spot, suit, DUEL) {}
 
     void takeEffect(Player *source, const std::vector<Player *> &targets) const override;
 };
