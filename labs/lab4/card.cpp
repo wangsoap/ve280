@@ -112,6 +112,31 @@ void Card::printCard() const {
     cout << "┘" << endl;
 }
 
+void LubuStrike::takeEffect(Player *source, const std::vector<Player *> &targets) const {
+    if (source->getStriked()) {
+        throw NonPlayableCardException(this);
+    } else {
+        Player *target = source->selectTarget();
+        if (target == source) {
+            throw SelfTargetException(source);
+        } else if (!target->getHealth()) {
+            throw DeadTargetException(target);
+        } else {
+            source->printPlay(this, target);
+            try {
+                const Card *card1 = target->requestCard(DODGE);
+                target->printPlay(card1);
+                const Card *card2 = target->requestCard(DODGE);
+                target->printPlay(card2);
+            } catch (DiscardException &e) {
+                target->printHit(this);
+                target->decreaseHealth();
+            }
+            source->setStriked(true);
+        }
+    }
+}
+
 void Strike::takeEffect(Player *source, const std::vector<Player *> &targets) const {
     if (source->getStriked()) {
         throw NonPlayableCardException(this);
@@ -149,11 +174,33 @@ void Peach::takeEffect(Player *source, const std::vector<Player *> &targets) con
 }
 
 void ArrowBarrage::takeEffect(Player *source, const std::vector<Player *> &targets) const {
-    // TODO: Your implementation here
+    for (Player *target: targets) {
+        source->printPlay(this);
+        if (target->getHealth() && target!=source) {
+            try {
+                const Card *card = target->requestCard(DODGE);
+                target->printPlay(card);
+            } catch (DiscardException &e) {
+                target->printHit(this);
+                target->decreaseHealth();
+            }
+        }
+    }
 }
 
 void BarbarianInvasion::takeEffect(Player *source, const std::vector<Player *> &targets) const {
-    // TODO: Your implementation here
+    for (Player *target: targets) {
+        source->printPlay(this);
+        if (target->getHealth() && target!=source) {
+            try {
+                const Card *card = target->requestCard(STRIKE);
+                target->printPlay(card);
+            } catch (DiscardException &e) {
+                target->printHit(this);
+                target->decreaseHealth();
+            }
+        }
+    }
 }
 
 void SomethingForNothing::takeEffect(Player *source, const std::vector<Player *> &targets) const {
@@ -171,13 +218,95 @@ void BountifulHarvest::takeEffect(Player *source, const std::vector<Player *> &t
 }
 
 void Dismantle::takeEffect(Player *source, const std::vector<Player *> &targets) const {
-    // TODO: Your implementation here
+    Player *target = source->selectTarget();
+    if (target == source) {
+        throw SelfTargetException(source);
+    } else if (!target->getHealth()) {
+        throw DeadTargetException(target);
+    } else {
+        source->printPlay(this, target);
+        if (target->getNumCards()==0){
+            throw NonPlayableCardException(this);
+        } else {
+            target->discardCard(rand()%target->getNumCards());
+        }
+    }
 }
 
 void Snatch::takeEffect(Player *source, const std::vector<Player *> &targets) const {
-    // TODO: Your implementation here
+    Player *target = source->selectTarget();
+    if (target == source) {
+        throw SelfTargetException(source);
+    } else if (!target->getHealth()) {
+        throw DeadTargetException(target);
+    } else {
+        source->printPlay(this, target);
+        if (target->getNumCards()==0){
+            throw NonPlayableCardException(this);
+        } else {
+            const Card *card = target->eraseCard(rand()%target->getNumCards());
+            source->pushCard(card);
+        }
+    }
+}
+
+void DiaoChanDuel::takeEffect(Player *source, const std::vector<Player *> &targets) const {
+    Player *target1 = source->selectTarget();
+    if (target1 == source) {
+        throw SelfTargetException(source);
+    } else if (!target1->getHealth()) {
+        throw DeadTargetException(target1);
+    } else if (target1->getHero()->getGender()==FEMALE){
+        throw GenderException(target1);
+    }else {
+        Player *target2 = source->selectTarget();
+        if (target1 == source) {
+            throw SelfTargetException(source);
+        } else if (!target1->getHealth()) {
+            throw DeadTargetException(target1);
+        } else if (target1->getHero()->getGender()==FEMALE){
+            throw GenderException(target1);
+        }else {
+            target1->printPlay(this, target2);
+            Player *loser = target2;
+            try {
+                while (true) {
+                    const Card *card1 = target2->requestCard(STRIKE);
+                    target2->printPlay(card1);
+                    loser = target1;
+                    const Card *card2 = target1->requestCard(STRIKE);
+                    target1->printPlay(card2);
+                    loser = target2;
+                }
+            } catch (DiscardException &e) {
+                loser->printHit(this);
+                loser->decreaseHealth();
+            }
+        }
+    }
 }
 
 void Duel::takeEffect(Player *source, const std::vector<Player *> &targets) const {
-    // TODO: Your implementation here
+    Player *target = source->selectTarget();
+    if (target == source) {
+        throw SelfTargetException(source);
+    } else if (!target->getHealth()) {
+        throw DeadTargetException(target);
+    } else {
+        source->printPlay(this, target);
+        Player *loser=target;
+        try {
+            while (true) {
+                const Card *card1 = target->requestCard(STRIKE);
+                target->printPlay(card1);
+                loser=source;
+                const Card *card2 = source->requestCard(STRIKE);
+                source->printPlay(card2);
+                loser=target;
+            }
+        } catch (DiscardException &e) {
+            loser->printHit(this);
+            loser->decreaseHealth();
+        }
+    }
 }
