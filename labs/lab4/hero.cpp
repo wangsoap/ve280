@@ -163,8 +163,15 @@ ZhenJi::ZhenJi() : Hero(WEI, FEMALE, 3, "甄姬", R"(    ,/##(*%@@%/####((((((((
 ##//**,,,,****,,,,,*,,,,,,**,,,,,*///**/****/////*****////////////*******//****/((#(*/*..,****//##()") {}
 
 const Card *ZhenJi::castCard(const Card *card) {
-    // TODO: Your implementation here
-    throw NonCastableCardException(card);
+    if (card == nullptr) {
+        throw NonCastableCardException(card);
+    }
+    const Card *castedCard;
+    if (card->getSuit()==SPADES||card->getSuit()==CLUBS) {
+        castedCard = new Dodge(card->getSpot(), card->getSuit());
+        castedCards.push_back(castedCard);
+        return castedCard;
+    } else {throw NonCastableCardException(card);}
 }
 
 HuaTuo::HuaTuo() : Hero(NEUTRAL, MALE, 3, "华佗", R"(    ,/##(*%@@%/###((((((((((((((((((((((((((((((((((((((((((((((((//(((((((((((((/*,......,*/(####/
@@ -218,8 +225,15 @@ HuaTuo::HuaTuo() : Hero(NEUTRAL, MALE, 3, "华佗", R"(    ,/##(*%@@%/###(((((((
 ##/////******///*,,,,,***,,,,,,,,,,,,,,,**,,,,,,,,,,,,,,,,,,,,,***,,,.,,,,,,,,,*/(#(*//**,***///##()") {}
 
 const Card *HuaTuo::castCard(const Card *card) {
-    // TODO: Your implementation here
-    throw NonCastableCardException(card);
+    if (card == nullptr) {
+        throw NonCastableCardException(card);
+    }
+    const Card *castedCard;
+    if (card->getSuit()==HEARTS||card->getSuit()==DIAMONDS) {
+        castedCard = new Peach(card->getSpot(), card->getSuit());
+        castedCards.push_back(castedCard);
+        return castedCard;
+    } else {throw NonCastableCardException(card);}
 }
 
 LuBu::LuBu() : Hero(NEUTRAL, MALE, 4, "吕布", R"(,/(#(*#%%(/####((((((((((((((((((((((((((((((((((((((((((((((((/(((((((((((((/*,......,*/(####/
@@ -273,8 +287,15 @@ LuBu::LuBu() : Hero(NEUTRAL, MALE, 4, "吕布", R"(,/(#(*#%%(/####((((((((((((((
 ##(((((((((((((((///////////////////////////////////////////////////***///***//(((#(/%@,***/((##()") {}
 
 const Card *LuBu::castCard(const Card *card) {
-    // TODO: Your implementation here
-    throw NonCastableCardException(card);
+    if (card == nullptr) {
+        throw NonCastableCardException(card);
+    }
+    const Card *castedCard;
+    if (card->getAction()==STRIKE){
+        castedCard = new LubuStrike(card->getSpot(), card->getSuit());
+        castedCards.push_back(castedCard);
+        return castedCard;
+    } else throw NonCastableCardException(card);
 }
 
 DiaoChan::DiaoChan() : Hero(NEUTRAL, FEMALE, 3, "貂蝉", R"(    ,/(#(*%@@%/###(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((/*,......,*/(####/
@@ -328,8 +349,12 @@ DiaoChan::DiaoChan() : Hero(NEUTRAL, FEMALE, 3, "貂蝉", R"(    ,/(#(*%@@%/###(
 ##//**********,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,*/(#(*(/,.,***///##()") {}
 
 const Card *DiaoChan::castCard(const Card *card) {
-    // TODO: Your implementation here
-    throw NonCastableCardException(card);
+    if (card == nullptr) {
+        throw NonCastableCardException(card);
+    }
+    const Card *castedCard=new DiaoChanDuel(card->getSpot(), card->getSuit());
+    castedCards.push_back(castedCard);
+    return castedCard;
 }
 
 Hero *newHero() {
