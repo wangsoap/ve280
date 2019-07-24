@@ -174,8 +174,8 @@ void Peach::takeEffect(Player *source, const std::vector<Player *> &targets) con
 }
 
 void ArrowBarrage::takeEffect(Player *source, const std::vector<Player *> &targets) const {
+    source->printPlay(this);
     for (Player *target: targets) {
-        source->printPlay(this);
         if (target->getHealth() && target!=source) {
             try {
                 const Card *card = target->requestCard(DODGE);
@@ -189,8 +189,8 @@ void ArrowBarrage::takeEffect(Player *source, const std::vector<Player *> &targe
 }
 
 void BarbarianInvasion::takeEffect(Player *source, const std::vector<Player *> &targets) const {
+    source->printPlay(this);
     for (Player *target: targets) {
-        source->printPlay(this);
         if (target->getHealth() && target!=source) {
             try {
                 const Card *card = target->requestCard(STRIKE);
