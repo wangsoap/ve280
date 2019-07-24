@@ -373,9 +373,66 @@ MyopicPlayer::MyopicPlayer(const std::string &name, Camp camp) : Player(name, ca
 
 void MyopicPlayer::playCard() {
     // TODO: Optimize MyopicPlayer's card playing strategies
+    //Problems: 1. Diao Chan's cast has many limitations and too complicate to be used
+    //2. Dismantle and Snatch will not always choose the enemy who have cards so cannot be used sometimes
+    //3. Hua Tuo will always choose to use peach first if possible
+
+    //other problems: 1. will use peach to enemy (could not be solved)
+    //2. problems happens when using Diao Chan's cast but there is no two male
+    const Card *card;
     if (!cards.empty()) {
         try {
-            cards[rand() % cards.size()]->takeEffect(this, getGame()->getPlayers());
+            int no_card_play=0;
+            while (!no_card_play) {
+                if (cards.empty()) no_card_play=1;
+                for (size_t i = 0; i < cards.size(); i++) {
+                    bool castable= false;
+                    if (getHero()->getName()!="貂蝉") {
+                        try {
+                            card = hero->castCard(cards[i]);
+                            castable = true;
+                        } catch (NonCastableCardException &e) {
+                        }
+                    }
+                    if (castable){
+                        if (card->getAction() == STRIKE && !getStriked()) {
+                            card->takeEffect(this, getGame()->getPlayers());
+                            discardCard(i);
+                            break;
+                        } else if (card->getAction() == PEACH){
+                            try {
+                                card->takeEffect(this, getGame()->getPlayers());
+                                discardCard(i);
+                                break;
+                            }catch (NonPlayableCardException &e) {
+                            }
+                        } else ;
+                    } else if (cards[i]->getAction() == STRIKE && !getStriked()) {
+                        cards[i]->takeEffect(this, getGame()->getPlayers());
+                        discardCard(i);
+                        break;
+                    } else if (cards[i]->getAction()==PEACH){
+                        try {
+                            cards[i]->takeEffect(this, getGame()->getPlayers());
+                            discardCard(i);
+                            break;
+                        }catch (NonPlayableCardException &e) {
+                        }
+                    } else {
+                        if (cards[i]->getAction()!=DODGE &&
+                        cards[i]->getAction()!=STRIKE &&
+                        cards[i]->getAction()!=PEACH){
+                            try {
+                                cards[i]->takeEffect(this, getGame()->getPlayers());
+                                discardCard(i);
+                                break;
+                            } catch (exception &e){
+                            }
+                        }
+                    }
+                    if (i >= cards.size() - 1) no_card_play = 1;
+                }
+            }
         } catch (exception &e) {}
     }
     throw DiscardException();
@@ -383,7 +440,11 @@ void MyopicPlayer::playCard() {
 
 Player *MyopicPlayer::selectTarget() {
     // TODO: Optimize MyopicPlayer's target selecting strategies
-    return getGame()->getPlayers()[rand() % getGame()->getPlayers().size()];
+    while (true){
+        int target=rand() % getGame()->getPlayers().size();
+        if (getGame()->getPlayers()[target]->getCamp()==this->camp) ;
+        else return getGame()->getPlayers()[target];
+    }
 }
 
 const Card *MyopicPlayer::requestCard(Action action) {
